@@ -43,7 +43,7 @@
                         </li>
                     }
                 </ul>
-                <ul class="navbar-nav justify-content-end">
+                <ul class="navbar-nav justify-content-end" style="align-items:center;">
                     <li class="nav-item">
                         <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank">
                             <i class="fas fa-external-link-alt mr-1"></i>Docs
@@ -66,6 +66,7 @@
                                 <h5 class="dropdown-item-text mb-0">@ViewBag.User.DisplayName</h5>
                                 <p class="dropdown-item-text text-muted mb-0">@ViewBag.User.Email</p>
                                 <div class="dropdown-divider"></div>
+                                @Html.ActionLink("My Profile", "Index", "Profile", new { area = "" }, new { @class = "dropdown-item" })
                                 @Html.ActionLink("Sign Out", "SignOut", "Account", new { area = "" }, new { @class = "dropdown-item" })
                             </div>
                         </li>

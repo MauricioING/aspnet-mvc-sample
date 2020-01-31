@@ -1,0 +1,153 @@
+﻿@model Microsoft.Graph.User
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My Profile</h2>
+
+<div class="card mb-4" id="user-card">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <div class="card-body">
+                <img src="@ViewBag.FullSizePhoto" class="card-img" />
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h3 class="card-title">@ViewBag.User.DisplayName</h3>
+                <p class="card-text">@ViewBag.User.Email</p>
+                @using (Html.BeginForm("Update", "Profile"))
+                {
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="workPhone">Work phone</label>
+                            <input type="tel" class="form-control" id="workPhone" name="workPhone" value="@Model.BusinessPhones.FirstOrDefault()" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="mobilePhone">Mobile phone</label>
+                            <input type="tel" class="form-control" id="mobilePhone" name="mobilePhone" value="@Model.MobilePhone" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="streetAddress">Street address</label>
+                        <input type="text" class="form-control" id="streetAddress" name="streetAddress" value="@Model.StreetAddress" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" name="city" value="@Model.City" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" name="state" value="@Model.State" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="postalCode">Postal code</label>
+                            <input type="text" class="form-control" id="postalCode" name="postalCode" value="@Model.PostalCode" />
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" formmethod="post" class="btn btn-primary">Update contact information</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mb-4" id="workInfo">
+    <div class="card-body">
+        <h3 class="card-title">Work information</h3>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="department">Department</label>
+                    <input type="text" class="form-control" id="department" value="@Model.Department" disabled />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="jobTitle">Job title</label>
+                    <input type="text" class="form-control" id="jobTitle" value="@Model.JobTitle" disabled />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="officeLocation">Office location</label>
+                    <input type="text" class="form-control" id="officeLocation" value="@Model.OfficeLocation" disabled />
+                </div>
+            </div>
+            <h4>Responsibilities</h4>
+            <ul class="list-group">
+                @foreach(var item in Model.Responsibilities)
+                {
+                    <li class="list-group-item">@item</li>
+                }
+            </ul>
+        </form>
+    </div>
+</div>
+<div class="card mb-4" id="aboutMe">
+    <div class="card-body">
+        <h3 class="card-title">About me</h3>
+        <p class="card-text">@Model.AboutMe</p>
+        <div class="row row-cols-1 row-cols-md-3">
+            <div class="col mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Schools attended</h4>
+                        <ul class="list-group">
+                            @foreach (var school in Model.Schools)
+                            {
+                                <li class="list-group-item">@school</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Skills</h4>
+                        <ul class="list-group">
+                            @foreach (var skill in Model.Skills)
+                            {
+                                <li class="list-group-item">@skill</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Interests</h4>
+                        <ul class="list-group">
+                            @foreach (var interest in Model.Interests)
+                            {
+                                <li class="list-group-item">@interest</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mb-4" id="settings">
+    <div class="card-body">
+        <h3 class="card-title">User settings</h3>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="timeZone">Time zone</label>
+                    <input type="text" class="form-control" id="timeZone" value="@ViewBag.User.TimeZone" disabled />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="dateFormat">Date format</label>
+                    <input type="text" class="form-control" id="dateFormat" value="@ViewBag.User.DateFormat" disabled />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="timeFormat">Time format</label>
+                    <input type="text" class="form-control" id="timeFormat" value="@ViewBag.User.TimeFormat" disabled />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

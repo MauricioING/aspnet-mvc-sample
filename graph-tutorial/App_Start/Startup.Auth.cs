@@ -101,15 +101,7 @@ namespace graph_tutorial
 
                 var userDetails = await GraphHelper.GetUserDetailsAsync(result.AccessToken);
 
-                var cachedUser = new CachedUser()
-                {
-                    DisplayName = userDetails.DisplayName,
-                    Email = string.IsNullOrEmpty(userDetails.Mail) ?
-                    userDetails.UserPrincipalName : userDetails.Mail,
-                    Avatar = string.Empty
-                };
-
-                tokenStore.SaveUserDetails(cachedUser);
+                tokenStore.SaveUserDetails(userDetails);
             }
             catch (MsalException ex)
             {
