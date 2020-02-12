@@ -84,6 +84,8 @@ namespace graph_tutorial
 
         private async Task OnAuthorizationCodeReceivedAsync(AuthorizationCodeReceivedNotification notification)
         {
+            notification.HandleCodeRedemption();
+
             var idClient = ConfidentialClientApplicationBuilder.Create(appId)
                 .WithRedirectUri(redirectUri)
                 .WithClientSecret(appSecret)
@@ -102,6 +104,7 @@ namespace graph_tutorial
                 var userDetails = await GraphHelper.GetUserDetailsAsync(result.AccessToken);
 
                 tokenStore.SaveUserDetails(userDetails);
+                notification.HandleCodeRedemption(null, result.IdToken);
             }
             catch (MsalException ex)
             {
