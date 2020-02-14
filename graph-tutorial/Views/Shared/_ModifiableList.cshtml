@@ -9,7 +9,7 @@
         @foreach (var item in Model)
         {
             <div class="input-group mb-2">
-                <input type="text" class="form-control existing-item-input" name="@ViewData["name"]" value="@item" @{ @(canUpdate ? null : new { disabled = "disabled" })  } ; />
+                <input type="text" form="@ViewData["form"]" class="form-control existing-item-input" name="@ViewData["name"]" value="@item" @{ @(canUpdate ? null : new { disabled = "disabled" })  } ; />
                 <div class="input-group-append">
                     <button type="button" class="btn btn-outline-secondary remove-button" @{ @(canUpdate ? null : new { disabled = "disabled" })  } ;>
                         <span>&times;</span>

@@ -4,3 +4,8 @@ function escapeUserInput(text) {
     textarea.textContent = text;
     return textarea.innerHTML;
 }
+
+// Initialize Bootstrap custom file input
+$(document).ready(function () {
+    bsCustomFileInput.init();
+});
