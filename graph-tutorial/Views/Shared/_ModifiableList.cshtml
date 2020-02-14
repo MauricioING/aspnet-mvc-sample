@@ -1,0 +1,30 @@
+﻿@model List<string>
+@{ 
+    var canUpdate = (bool)ViewData["canUpdate"];
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">@ViewData["title"]</h4>
+        @foreach (var item in Model)
+        {
+            <div class="input-group mb-2">
+                <input type="text" class="form-control existing-item-input" name="@ViewData["name"]" value="@item" @{ @(canUpdate ? null : new { disabled = "disabled" })  } ; />
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary remove-button" @{ @(canUpdate ? null : new { disabled = "disabled" })  } ;>
+                        <span>&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+        @if (canUpdate)
+        {
+            <div class="input-group">
+                <input type="text" class="form-control new-item-input" data-name="@ViewData["name"]" placeholder="@ViewData["placeholder"]" />
+                <div class="input-group-append">
+                    <button class="btn btn-secondary add-new-item" type="button">+</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
