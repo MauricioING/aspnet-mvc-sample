@@ -137,6 +137,26 @@ namespace graph_tutorial.Helpers
 
             await graphClient.Me.Request().UpdateAsync(userProfile);
         }
+        
+        public static async Task UpdateUserProfilePhotoAsync(Stream photoStream)
+        {
+            var graphClient = GetAuthenticatedClient();
+
+            // Update the photo
+            await graphClient.Me.Photo.Content
+                .Request()
+                .PutAsync(photoStream);
+
+            var tokenStore = new SessionTokenStore(null,
+                HttpContext.Current, ClaimsPrincipal.Current);
+
+            var cachedUser = tokenStore.GetUserDetails();
+
+            // Get the avatar-sized photo and save
+            // it in the cache
+            cachedUser.Avatar = await GetUserPhotoAsDataUriAsync(graphClient, "48x48");
+            tokenStore.SaveUserDetails(cachedUser);
+        }
 
         public static async Task<IEnumerable<Event>> GetEventsAsync()
         {

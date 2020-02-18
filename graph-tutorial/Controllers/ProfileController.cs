@@ -1,6 +1,7 @@
 ﻿using graph_tutorial.Helpers;
 using graph_tutorial.Models;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace graph_tutorial.Controllers
@@ -40,6 +41,16 @@ namespace graph_tutorial.Controllers
             {
                 await GraphHelper.UpdateUserProfileAsync(updatePhoneUser);
             }
+
+            return RedirectToAction("Index");
+        }
+
+        // POST: Profile/Update
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> UpdatePhoto(HttpPostedFileBase profilePhoto)
+        {
+            await GraphHelper.UpdateUserProfilePhotoAsync(profilePhoto.InputStream);
 
             return RedirectToAction("Index");
         }
