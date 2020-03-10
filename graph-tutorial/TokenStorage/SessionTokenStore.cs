@@ -15,6 +15,9 @@ namespace graph_tutorial.TokenStorage
         public string DisplayName { get; set; }
         public string Email { get; set; }
         public string Avatar { get; set; }
+        public string TimeZone { get; set; }
+        public string DateFormat { get; set; }
+        public string TimeFormat { get; set; }
     }
 
     public class SessionTokenStore
